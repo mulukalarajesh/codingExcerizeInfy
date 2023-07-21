@@ -17,8 +17,13 @@ public class GitHubService {
     private RestTemplate restTemplate;
 
     public List<GitHubRepository> getHottestRepositories(int limit) {
-        String apiUrl = GITHUB_API_URL + limit;
-        GitHubResponse response = restTemplate.getForObject(apiUrl, GitHubResponse.class);
-        return response != null ? response.getItems() : new ArrayList<>();
+        try {
+            String apiUrl = GITHUB_API_URL + limit;
+            GitHubResponse response = restTemplate.getForObject(apiUrl, GitHubResponse.class);
+            return response != null ? response.getItems() : new ArrayList<>();
+        }catch(Exception e){
+            throw  e;
+
+        }
     }
 }
